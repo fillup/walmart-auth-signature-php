@@ -9,11 +9,11 @@ as easy as calling a function.
 The easiest way to install this library is using Composer. Simply add 
 the following to your composer.json file:
 
-        "fillup/walmart-auth-signature-php": "dev-master"
+    "fillup/walmart-auth-signature-php": "dev-master"
         
 Or run ```composer require fillup/walmart-auth-signature-php:dev-master```. 
-This assumes you have composer installed and available in your path as 
-```composer```.
+This assumes you have composer installed and available in your path 
+as ```composer```.
 
 ## Versioning
 This library uses semantic versioning as well as a Git Flow process
@@ -29,36 +29,37 @@ If you need to make repeated API calls you can instantiate a Signature
 object and simply call the ```getSignature``` method to get a new 
 signature over and over:
 
+```php
+<?php
 
-        <?php
-        
-        use Walmart\Auth\Signature as AuthSignature;
-        
-        $authSignature = new AuthSignature($consumerId, $privateKey, $requestUrl, $requestMethod);
-        $signatureString = $authSignature->getSignature();
-        
-        // Make your call
-        
-        // Get a new signature for a new call
-        $signatureString = $authSignature->getSignature(null,$newUrl);
+use Walmart\Auth\Signature as AuthSignature;
 
+$authSignature = new AuthSignature($consumerId, $privateKey, $requestUrl, $requestMethod);
+$signatureString = $authSignature->getSignature();
+
+// Make your call
+
+// Get a new signature for a new call
+$signatureString = $authSignature->getSignature(null,$newUrl);
+```
 
 
 ### Static method interface
 Sometimes just calling a static method is easier or more elegant, 
 here you go:
 
+```php
+<?php
 
-        <?php
-        
-        use Walmart\Auth\Signature as AuthSignature;
-        
-        $signatureString = AuthSignature::calculateSignature($consumerId, $privateKey, $requestUrl, $requestMethod);
-        
-        // Make your call
-        
-        // Get a new signature for a new call
-        $signatureString = AuthSignature::calculateSignature($consumerId, $privateKey, $requestUrl, $requestMethod);
+use Walmart\Auth\Signature as AuthSignature;
+
+$signatureString = AuthSignature::calculateSignature($consumerId, $privateKey, $requestUrl, $requestMethod);
+
+// Make your call
+
+// Get a new signature for a new call
+$signatureString = AuthSignature::calculateSignature($consumerId, $privateKey, $requestUrl, $requestMethod);
+```
 
 ## Contributing
 I appreciate issue reports and pull requests, so if you see opportunity 
