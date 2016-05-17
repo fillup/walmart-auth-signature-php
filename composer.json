@@ -1,0 +1,26 @@
+{
+  "name": "fillup/walmart-auth-signature-php",
+  "description": "PHP library for calculating auth signatures for Walmart APIs",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Phillip Shipley",
+      "email": "phillip.shipley@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.3.3",
+    "phpseclib/phpseclib": "^2.0.1",
+    "roave/security-advisories": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Walmart\\Auth\\": "src/"
+    }
+  }
+}
