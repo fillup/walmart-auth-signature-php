@@ -10,9 +10,7 @@ php:
 install:
   - composer install
 
-script:
-  - mkdir -p build/logs
-  - php vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml tests/
+script: vendor/bin/phpunit --configuration tests/travis.xml
 
 after_script:
   - php vendor/bin/coveralls -v
