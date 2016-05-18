@@ -4,6 +4,9 @@ Walmart uses a signature calculation algorithm for authenticating API
 calls, it is fairly complicated so this library is intended to make it 
 as easy as calling a function. 
 
+## Build Status
+[![Travis-CI Build Status](https://api.travis-ci.org/fillup/walmart-auth-signature-php.png?branch=master)](https://travis-ci.org/fillup/walmart-auth-signature-php) [![Coverage Status](https://coveralls.io/repos/fillup/walmart-auth-signature-php/badge.png)](https://coveralls.io/r/fillup/walmart-auth-signature-php)
+
 ## Installation
 
 The easiest way to install this library is using Composer. Simply add 
