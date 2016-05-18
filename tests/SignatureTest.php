@@ -5,7 +5,7 @@ include __DIR__ . '/../vendor/autoload.php';
 
 use Walmart\Auth\Signature;
 
-class SignatureTest extends \PHPUnit_Framework_Testcase
+class SignatureTest extends \PHPUnit_Framework_TestCase
 {
     /*
      * Dummy credentials for testing, these are not valid credentials for calling Walmart APIs, sorry hackers.
