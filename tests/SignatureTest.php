@@ -34,6 +34,10 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
         $expected = 'GmuOrPQ67wuVje8FYtLqq5Li2/BehKsITW/8CNMNuwI/j0jm0Y6Hbj4zyp963/UYPAUWJUweaMoyw6gHnOnxXV3A/u9oeh19Z4jfTD19w0YKCCSp5dX8RdiktIAYjpITdz8Tnif3McPqtddWLdjz9MjtIZUnGoTCGNWFYlJuc6Y=';
         $actual = Signature::calculateSignature($this->consumerId,$this->privateKey,$requestUrl,$requestMethod,$timestamp);
         $this->assertEquals($expected, $actual);
+
+        // test without providing timestamp to make sure it works without it
+        $actual = Signature::calculateSignature($this->consumerId,$this->privateKey,$requestUrl,$requestMethod);
+        $this->assertEquals(172, strlen($actual));
     }
 
     public function testCalculateSignatureInvalidPrivateKey()
@@ -67,7 +71,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
     {
         $expected = round(microtime(true) * 1000);
         $actual = Signature::getMilliseconds();
-        $this->assertEquals($expected, $actual, '', 10); // allow for a 10ms discrepency 
+        $this->assertEquals($expected, $actual, '', 10); // allow for a 10ms discrepency
     }
 
 }
