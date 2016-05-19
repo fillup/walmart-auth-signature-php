@@ -5,7 +5,7 @@ calls, it is fairly complicated so this library is intended to make it
 as easy as calling a function. 
 
 ## Build Status
-[![Travis-CI Build Status](https://api.travis-ci.org/fillup/walmart-auth-signature-php.png?branch=master)](https://travis-ci.org/fillup/walmart-auth-signature-php) [![Coverage Status](https://coveralls.io/repos/fillup/walmart-auth-signature-php/badge.png)](https://coveralls.io/r/fillup/walmart-auth-signature-php)
+[![Build Status](https://travis-ci.org/fillup/walmart-auth-signature-php.svg?branch=develop)](https://travis-ci.org/fillup/walmart-auth-signature-php) [![Coverage Status](https://coveralls.io/repos/github/fillup/walmart-auth-signature-php/badge.svg?branch=develop)](https://coveralls.io/github/fillup/walmart-auth-signature-php?branch=develop)
 
 ## Installation
 
