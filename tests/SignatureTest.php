@@ -45,4 +45,29 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testObjectInterface()
+    {
+        $requestMethod = 'GET';
+        $requestUrl = 'https://marketplace.stg.walmartapis.com/v2/feeds?offset=0&limit=1';
+        $signatureObject = new Signature($this->consumerId, $this->privateKey, $requestUrl, $requestMethod);
+
+        $this->assertEquals($this->consumerId, $signatureObject->consumerId);
+        $this->assertEquals($this->privateKey, $signatureObject->privateKey);
+        $this->assertEquals($requestUrl, $signatureObject->requestUrl);
+        $this->assertEquals($requestMethod, $signatureObject->requestMethod);
+
+        $timestamp = '1462475614410';
+        $expected = 'IIeNSuFsBGpEQE7OWcprahLC8mk54ljlMFrKdRP2zo2Kil7t1knhb4+WmNq6sg1zZSOo9IjKwtu1eIgqM5Isf8UvcEQYV44ighfDBOLkDmqvc/BJRm6erZ5A/n5gbhIssnv8CtuQvQUdLTw0wAG0sW48CQW8CDTCaxlu2LaCCyw=';
+
+        $signatureString = $signatureObject->getSignature($timestamp);
+        $this->assertEquals($expected, $signatureString);
+    }
+
+    public function testGetMilliseconds()
+    {
+        $expected = round(microtime(true) * 1000);
+        $actual = Signature::getMilliseconds();
+        $this->assertEquals($expected, $actual, '', 10); // allow for a 10ms discrepency 
+    }
+
 }
