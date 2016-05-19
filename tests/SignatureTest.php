@@ -65,6 +65,10 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
 
         $signatureString = $signatureObject->getSignature($timestamp);
         $this->assertEquals($expected, $signatureString);
+
+        // test without providing timestamp to make sure it works without it
+        $actual = $signatureObject->getSignature();
+        $this->assertEquals(172, strlen($actual));
     }
 
     public function testGetMilliseconds()
