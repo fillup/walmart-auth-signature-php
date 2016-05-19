@@ -5,7 +5,7 @@ include __DIR__ . '/../vendor/autoload.php';
 
 use Walmart\Auth\Signature;
 
-class SignatureTest extends \PHPUnit_Framework_Testcase
+class SignatureTest extends \PHPUnit_Framework_TestCase
 {
     /*
      * Dummy credentials for testing, these are not valid credentials for calling Walmart APIs, sorry hackers.
@@ -34,6 +34,10 @@ class SignatureTest extends \PHPUnit_Framework_Testcase
         $expected = 'GmuOrPQ67wuVje8FYtLqq5Li2/BehKsITW/8CNMNuwI/j0jm0Y6Hbj4zyp963/UYPAUWJUweaMoyw6gHnOnxXV3A/u9oeh19Z4jfTD19w0YKCCSp5dX8RdiktIAYjpITdz8Tnif3McPqtddWLdjz9MjtIZUnGoTCGNWFYlJuc6Y=';
         $actual = Signature::calculateSignature($this->consumerId,$this->privateKey,$requestUrl,$requestMethod,$timestamp);
         $this->assertEquals($expected, $actual);
+
+        // test without providing timestamp to make sure it works without it
+        $actual = Signature::calculateSignature($this->consumerId,$this->privateKey,$requestUrl,$requestMethod);
+        $this->assertEquals(172, strlen($actual));
     }
 
     public function testCalculateSignatureInvalidPrivateKey()
@@ -43,6 +47,35 @@ class SignatureTest extends \PHPUnit_Framework_Testcase
         $this->setExpectedException('\Exception', '', 1446780146);
         Signature::calculateSignature($consumerId,$privateKey,$requestUrl,$requestMethod);
 
+    }
+
+    public function testObjectInterface()
+    {
+        $requestMethod = 'GET';
+        $requestUrl = 'https://marketplace.stg.walmartapis.com/v2/feeds?offset=0&limit=1';
+        $signatureObject = new Signature($this->consumerId, $this->privateKey, $requestUrl, $requestMethod);
+
+        $this->assertEquals($this->consumerId, $signatureObject->consumerId);
+        $this->assertEquals($this->privateKey, $signatureObject->privateKey);
+        $this->assertEquals($requestUrl, $signatureObject->requestUrl);
+        $this->assertEquals($requestMethod, $signatureObject->requestMethod);
+
+        $timestamp = '1462475614410';
+        $expected = 'IIeNSuFsBGpEQE7OWcprahLC8mk54ljlMFrKdRP2zo2Kil7t1knhb4+WmNq6sg1zZSOo9IjKwtu1eIgqM5Isf8UvcEQYV44ighfDBOLkDmqvc/BJRm6erZ5A/n5gbhIssnv8CtuQvQUdLTw0wAG0sW48CQW8CDTCaxlu2LaCCyw=';
+
+        $signatureString = $signatureObject->getSignature($timestamp);
+        $this->assertEquals($expected, $signatureString);
+
+        // test without providing timestamp to make sure it works without it
+        $actual = $signatureObject->getSignature();
+        $this->assertEquals(172, strlen($actual));
+    }
+
+    public function testGetMilliseconds()
+    {
+        $expected = round(microtime(true) * 1000);
+        $actual = Signature::getMilliseconds();
+        $this->assertEquals($expected, $actual, '', 10); // allow for a 10ms discrepency
     }
 
 }
