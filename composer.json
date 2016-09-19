@@ -12,12 +12,14 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=5.3.3",
-    "phpseclib/phpseclib": "^2.0.1",
-    "roave/security-advisories": "dev-master"
+    "phpseclib/phpseclib": "^2.0.1"
   },
   "require-dev": {
     "phpunit/phpunit": "^4.8",
     "satooshi/php-coveralls": "^1.0.1"
+  },
+  "suggest": {
+    "roave/security-advisories": "Make sure you don't install dependencies with known issues. Install dev-master version."
   },
   "autoload": {
     "psr-4": {
